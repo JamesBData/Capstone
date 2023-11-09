@@ -47,7 +47,7 @@ class Food:
 
     def calculate_totals(self):
         subtotal = sum(food.price * quantity for food, quantity in self.cart)
-        sales_tax_rate = Decimal(0.06)  # Adjust as needed
+        sales_tax_rate = Decimal(0.06)
         sales_tax = subtotal * sales_tax_rate
         grand_total = subtotal + sales_tax
         return subtotal, sales_tax, grand_total
