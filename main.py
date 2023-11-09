@@ -1,15 +1,17 @@
 from decimal import Decimal, ROUND_HALF_UP
-class Food:
-    menu = []
 
+class Food:
     def __init__(self, name, category, description, price):
         self.name = name
         self.category = category
         self.description = description
-        self.price = price
+        self.price = Decimal(price).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
+class Menu:
+    def __init__(self):
         self.items = [
             Food("Beef Burger", "Burger", "Angus Beef Burger", 5.00),
-            Food("Chicken Sandwhich", "Burger", "Seasoned Chicken Sandwich", 5.00),
+            Food("Chicken Sandwich", "Burger", "Seasoned Chicken Sandwich", 5.00),
             Food("Fish Sandwich", "Burger", "Fresh Salmon Sandwich", 7.00),
             Food("Curly Fries", "Side", "Seasoned Curly Fries", 2.00),
             Food("Onion Rings", "Side", "Seasoned Onion Rings", 3.00),
@@ -52,3 +54,7 @@ class Food:
         grand_total = subtotal + sales_tax
         return subtotal, sales_tax, grand_total
 
+
+
+if __name__ == "__main__":
+    Menu().run()
