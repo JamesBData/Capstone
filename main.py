@@ -21,6 +21,34 @@ class Food:
             Food("Combo 2", "Combo", "Comes With Chicken Sandwich, Onion Rings, And Pepsi", 7.00),
             Food("Combo 3", "Combo", "Comes With Fish Sandwich, Cheese Curds, And Root Beer", 7.00),
         ]
-for item in Food.menu:
-    print({menu})
+        self.cart = []
+
+    def show_menu(self):
+        print("==== Menu ====")
+        for i, food in enumerate(self.food, 1):
+            print(f"{i}. {food.name} ({food.price:.2f} USD)")
+        print("M. Main Menu")
+
+    def take_order(self):
+        while True:
+            self.show_menu()
+            choice = input("Select an item (number or 'M' to finish): ").strip()
+            if choice.lower() == 'm':
+                break
+            try:
+                choice, quantity = int(choice), int(input("Enter quantity: "))
+                if 1 <= choice <= len(self.food) and 1 <= quantity:
+                    self.cart.append((self.food[choice - 1], quantity))
+                    print(f"{quantity} {self.food[choice - 1].name}(s) added to the cart.")
+                else:
+                    print("Invalid input.")
+            except (ValueError, IndexError):
+                print("Invalid input. Please enter a number or 'M' for the main menu.")
+
+    def calculate_totals(self):
+        subtotal = sum(food.price * quantity for food, quantity in self.cart)
+        sales_tax_rate = Decimal(0.06)  # Adjust as needed
+        sales_tax = subtotal * sales_tax_rate
+        grand_total = subtotal + sales_tax
+        return subtotal, sales_tax, grand_total
 
