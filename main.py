@@ -86,7 +86,7 @@ def show_menu(menu):
     print('===Menu===')
     for i, item in enumerate(menu, 1):
         print(f"{i}. {item}")
-    print("M. Main Menu")
+    print("0. Main Menu")
 
 
 # show_menu(Food.menu)
@@ -94,24 +94,42 @@ def show_menu(menu):
 
 # def take_order(menu):
 #     cart = []
-while True:
+request_again_flag = True
+while request_again_flag:
+
     show_menu(Food.menu)
     choice = int(input("Select an item (number or '0' to finish): "))
     if choice == '0':
-        break
+        request_again_flag = False
     elif 1 <= choice <= len(Food.menu):
         quantity = int(input('Enter quantity: '))
         line_total = Food.menu[choice - 1].price * quantity
         subtotal.append(int(line_total))
         print(f'{quantity} {Food.menu[choice - 1].name}(s) costs ${line_total}.')
-        break
+
     else:
         print("Invalid input. Please enter a number or '0' for the main menu.")
 
-    order_again = input('Would you like to add to your order? (y or n) \n> ')
+    while True:
+
 
     if order_again == 'y':
 
 
 #if __name__ == "__main__":
+
+
+        order_again = input('Would you like to add to your order? (y or n) \n> ')
+
+        if order_again == 'y':
+            break
+        elif order_again == 'n':
+            subtotal = sum(food.price * quantity for food, quantity in self.cart)
+            sales_tax_rate = Decimal(0.06)
+            sales_tax = subtotal * sales_tax_rate
+            grand_total = subtotal + sales_tax
+            request_again_flag = False
+            break
+        else:
+            print("That entry is invalid, please try again.")
 
