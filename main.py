@@ -87,7 +87,12 @@ def show_menu(menu):
     for i, item in enumerate(menu, 1):
         print(f"{i}. {item}")
     print("0. Main Menu")
-
+def calculate_totals(subtotal):
+    sub_total = sum(subtotal)
+    tax_rate = Decimal(0.06)
+    sales_tax = subtotal * tax_rate
+    grand_total = sub_total + sales_tax
+    return f"Your subtotal is {sub_total}, your tax is {sales_tax}, and your grand total is {grand_total}."
 
 # show_menu(Food.menu)
 
@@ -110,26 +115,18 @@ while request_again_flag:
     else:
         print("Invalid input. Please enter a number or '0' for the main menu.")
 
+
+
+
     while True:
-
-
-    if order_again == 'y':
-
-
-#if __name__ == "__main__":
-
-
-        order_again = input('Would you like to add to your order? (y or n) \n> ')
-
+        order_again = input("Would you like to add to your order? (y/n)\n> ")
         if order_again == 'y':
-            break
+                break
         elif order_again == 'n':
-            subtotal = sum(food.price * quantity for food, quantity in self.cart)
-            sales_tax_rate = Decimal(0.06)
-            sales_tax = subtotal * sales_tax_rate
-            grand_total = subtotal + sales_tax
+            calculate_totals(subtotal)
             request_again_flag = False
             break
         else:
             print("That entry is invalid, please try again.")
+
 
