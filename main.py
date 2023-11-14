@@ -91,7 +91,7 @@ while request_again_flag:
                 print("\n==== Receipt ====")
                 for order_item in cart:
                     print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
-
+                print(f"Amount tendered: {amount_tendered:.2f} USD\nChange: {change:.2f} USD ")
 
 
             elif payment_choice == '2':
