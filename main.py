@@ -112,7 +112,8 @@ while request_again_flag:
     while True:
         new_order = input("\nWould you like to start a new order? (y/n)\n> ")
         if new_order == 'y':
-            cart = []
+            cart.clear()
+            subtotal.clear()
             break
         elif new_order == 'n':
             print('Goodbye! Thank you for visiting The Burger Joint!')
