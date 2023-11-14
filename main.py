@@ -20,7 +20,7 @@ burger2 = Food("Chicken Sandwich", "Burger", "Seasoned Chicken Sandwich", 5.00)
 burger3 = Food("Fish Sandwich", "Burger", "Fresh Salmon Sandwich", 7.00)
 side1 = Food("Curly Fries", "Side", "Seasoned Curly Fries", 2.00)
 side2 = Food("Onion Rings", "Side", "Seasoned Onion Rings", 3.00)
-side3 = Food("Cheese Curds", "Side", "Seasoned Cheese CUrds", 4.00)
+side3 = Food("Cheese Curds", "Side", "Seasoned Cheese Curds", 4.00)
 drink1 = Food("Coca-Cola", "Drink", "Classic Coke Taste", 1.50)
 drink2 = Food("Pepsi", "Drink", "Classic Pepsi Taste", 1.50)
 drink3 = Food("Root Beer", "Drink", "Classic Root Beer Taste", 1.50)
@@ -122,5 +122,3 @@ while request_again_flag:
 
         else:
             print("I am sorry. That entry is invalid, please try again.")
-
-
