@@ -31,7 +31,6 @@ combo3 = Food("Combo 3", "Combo", "Comes With Fish Sandwich, Cheese Curds, And R
 subtotal = []
 
 cart = []
-item = {}
 
 print("Hello! Welcome to The Burger Joint!")
 
@@ -43,12 +42,6 @@ def show_menu(menu):
     print("0. Exit Menu")
 
 
-# def calculate_totals(subtotal):
-#     sub_total = sum(subtotal)
-#     sales_tax = 0.06 * sub_total
-#     grand_total = sub_total + sales_tax
-#     return f"Subtotal: ${sub_total:.2f} \n6% Sales Tax: ${sales_tax:.2f} \nGrand Total: ${grand_total:.2f}"
-
 
 request_again_flag = True
 while request_again_flag:
@@ -59,7 +52,8 @@ while request_again_flag:
     if choice == '0':
         request_again_flag = False
     elif 1 <= choice <= len(Food.menu):
-        item["choice"] = Food.menu[choice - 1]
+        item = {}
+        item["choice"] = Food.menu[choice - 1].name
         item["quantity"] = int(input('Enter quantity: '))
         line_total = Food.menu[choice - 1].price * item["quantity"]
         subtotal.append(int(line_total))
@@ -89,9 +83,10 @@ while request_again_flag:
                 amount_tendered = Decimal(input("Enter amount tendered: "))
                 change = amount_tendered - grand_total
                 print("\n==== Receipt ====")
-                for order_item in cart:
-                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
-                print(f"Amount tendered: {amount_tendered:.2f} USD\nChange: {change:.2f} USD ")
+                for item in cart:
+                    print(f"{item['quantity']}: {item['choice']}(s)")
+                print(f'Subtotal: ${sub_total:.2f} \nGrand total: ${grand_total:.2f} \nAmount tendered: ${amount_tendered:.2f} \nChange: ${change:.2f}')
+
 
 
             elif payment_choice == '2':
@@ -99,8 +94,8 @@ while request_again_flag:
                 cvv = int(input('Enter your 3 digit CVV: '))
                 expiration_date = int(input('Enter expiration date (Please provide just 4 digits.): '))
                 print("\n==== Receipt ====")
-                for order_item in cart:
-                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
+                for item in cart:
+                    print(f"{item['quantity']}: {item['choice']}(s)")
 
 
 
@@ -108,8 +103,8 @@ while request_again_flag:
                 check_number = int(input('Enter your check number: '))
                 print("\n==== Receipt ====")
                 print("\n==== Receipt ====")
-                for order_item in cart:
-                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
+                for item in cart:
+                    print(f"{item['quantity']}: {item['choice']}(s)")
 
 
             else:
