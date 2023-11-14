@@ -1,4 +1,4 @@
-from decimal import Decimal, ROUND_HALF_UP
+from decimal import Decimal
 
 
 class Food:
@@ -8,7 +8,7 @@ class Food:
         self.name = name
         self.category = category
         self.description = description
-        self.price = Decimal(price).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        self.price = Decimal(price).quantize(Decimal("0.01"))
         Food.menu.append(self)
 
     def __str__(self):
@@ -42,15 +42,17 @@ def show_menu(menu):
     print("0. Exit Menu")
 
 
-
 request_again_flag = True
 while request_again_flag:
 
     show_menu(Food.menu)
     choice = int(input("Select an item (number or '0' to finish): "))
 
-    if choice == '0':
-        request_again_flag = False
+    if choice == 0:
+        # request_again_flag = False
+        print('Goodbye! Thank you for visiting The Burger Joint!')
+        break
+
     elif 1 <= choice <= len(Food.menu):
         item = {}
         item["choice"] = Food.menu[choice - 1].name
@@ -87,8 +89,6 @@ while request_again_flag:
                     print(f"{item['quantity']}: {item['choice']}(s)")
                 print(f'Subtotal: ${sub_total:.2f} \nGrand total: ${grand_total:.2f} \nAmount tendered: ${amount_tendered:.2f} \nChange: ${change:.2f}')
 
-
-
             elif payment_choice == '2':
                 credit_card_number = int(input('Enter your 12 digit credit number: '))
                 cvv = int(input('Enter your 3 digit CVV: '))
@@ -96,25 +96,29 @@ while request_again_flag:
                 print("\n==== Receipt ====")
                 for item in cart:
                     print(f"{item['quantity']}: {item['choice']}(s)")
-
-
+                print(f'Subtotal: ${sub_total:.2f} \nGrand total: ${grand_total:.2f} \nCard processed: {credit_card_number}')
 
             elif payment_choice == '3':
                 check_number = int(input('Enter your check number: '))
                 print("\n==== Receipt ====")
-                print("\n==== Receipt ====")
                 for item in cart:
                     print(f"{item['quantity']}: {item['choice']}(s)")
-
+                print(f'Subtotal: ${sub_total:.2f} \nGrand total: ${grand_total:.2f} \nPaid with check number: {check_number}')
 
             else:
                 print('Invalid input, please try again.')
+            break
 
-
-
-
+    while True:
+        new_order = input("\nWould you like to start a new order? (y/n)\n> ")
+        if new_order == 'y':
+            cart = []
+            break
+        elif new_order == 'n':
+            print('Goodbye! Thank you for visiting The Burger Joint!')
             request_again_flag = False
             break
+
         else:
             print("I am sorry. That entry is invalid, please try again.")
 
