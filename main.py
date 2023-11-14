@@ -89,7 +89,9 @@ while request_again_flag:
                 amount_tendered = Decimal(input("Enter amount tendered: "))
                 change = amount_tendered - grand_total
                 print("\n==== Receipt ====")
-                print(cart)
+                for order_item in cart:
+                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
+
 
 
             elif payment_choice == '2':
@@ -97,13 +99,18 @@ while request_again_flag:
                 cvv = int(input('Enter your 3 digit CVV: '))
                 expiration_date = int(input('Enter expiration date (Please provide just 4 digits.): '))
                 print("\n==== Receipt ====")
-                print(cart)
+                for order_item in cart:
+                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
+
 
 
             elif payment_choice == '3':
                 check_number = int(input('Enter your check number: '))
                 print("\n==== Receipt ====")
-                print(cart)
+                print("\n==== Receipt ====")
+                for order_item in cart:
+                    print(f"{order_item['quantity']} {order_item['choice'].name}(s) - ${order_item['quantity'] * order_item['choice'].price}")
+
 
             else:
                 print('Invalid input, please try again.')
