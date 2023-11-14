@@ -76,19 +76,40 @@ while request_again_flag:
             break
         elif order_again == 'n':
             sub_total = sum(subtotal)
-            sales_tax = 0.06 * sub_total
+            sales_tax_rate = Decimal(0.06)
+            sales_tax = sales_tax_rate * sub_total
             grand_total = sub_total + sales_tax
             print(f"Subtotal: ${sub_total:.2f} \n6% Sales Tax: ${sales_tax:.2f} \nGrand Total: ${grand_total:.2f}")
 
             print("\n==== Payment ====")
             print("1. Cash\n2. Credit Card\n3. Check")
-            payment_choice: input("Select a payment type: ")
+            payment_choice = input("Select a payment type: ")
 
             if payment_choice == '1':
                 amount_tendered = Decimal(input("Enter amount tendered: "))
                 change = amount_tendered - grand_total
                 print("\n==== Receipt ====")
                 print(cart)
+
+
+            elif payment_choice == '2':
+                credit_card_number = int(input('Enter your 12 digit credit number: '))
+                cvv = int(input('Enter your 3 digit CVV: '))
+                expiration_date = int(input('Enter expiration date (Please provide just 4 digits.): '))
+                print("\n==== Receipt ====")
+                print(cart)
+
+
+            elif payment_choice == '3':
+                check_number = int(input('Enter your check number: '))
+                print("\n==== Receipt ====")
+                print(cart)
+
+            else:
+                print('Invalid input, please try again.')
+
+
+
 
             request_again_flag = False
             break
