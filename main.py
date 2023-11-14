@@ -28,8 +28,10 @@ combo1 = Food("Combo 1", "Combo", "Comes With Beef Burger, Curly Fries, And Coca
 combo2 = Food("Combo 2", "Combo", "Comes With Chicken Sandwich, Onion Rings, And Pepsi", 7.00)
 combo3 = Food("Combo 3", "Combo", "Comes With Fish Sandwich, Cheese Curds, And Root Beer", 7.00)
 
-
 subtotal = []
+
+cart = []
+item = {}
 
 print("Hello! Welcome to The Burger Joint!")
 
@@ -41,12 +43,11 @@ def show_menu(menu):
     print("0. Exit Menu")
 
 
-def calculate_totals(subtotal):
-    sub_total = sum(subtotal)
-    tax_rate = Decimal(0.06)
-    sales_tax = subtotal * int(tax_rate)
-    grand_total = sub_total + sales_tax
-    return f"Subtotal: ${sub_total} \n6% Sales Tax: ${sales_tax} \nGrand Total: ${grand_total}."
+# def calculate_totals(subtotal):
+#     sub_total = sum(subtotal)
+#     sales_tax = 0.06 * sub_total
+#     grand_total = sub_total + sales_tax
+#     return f"Subtotal: ${sub_total:.2f} \n6% Sales Tax: ${sales_tax:.2f} \nGrand Total: ${grand_total:.2f}"
 
 
 request_again_flag = True
@@ -58,10 +59,13 @@ while request_again_flag:
     if choice == '0':
         request_again_flag = False
     elif 1 <= choice <= len(Food.menu):
-        quantity = int(input('Enter quantity: '))
-        line_total = Food.menu[choice - 1].price * quantity
+        item["choice"] = Food.menu[choice - 1]
+        item["quantity"] = int(input('Enter quantity: '))
+        line_total = Food.menu[choice - 1].price * item["quantity"]
         subtotal.append(int(line_total))
-        print(f'{quantity} {Food.menu[choice - 1].name}(s) costs ${line_total}.')
+        cart.append(item)
+
+        print(f'{item["quantity"]} {Food.menu[choice - 1].name}(s) costs ${line_total}.')
 
     else:
         print("I am sorry. That entry is invalid, please try again.")
@@ -71,7 +75,21 @@ while request_again_flag:
         if order_again == 'y':
             break
         elif order_again == 'n':
-            calculate_totals(subtotal)
+            sub_total = sum(subtotal)
+            sales_tax = 0.06 * sub_total
+            grand_total = sub_total + sales_tax
+            print(f"Subtotal: ${sub_total:.2f} \n6% Sales Tax: ${sales_tax:.2f} \nGrand Total: ${grand_total:.2f}")
+
+            print("\n==== Payment ====")
+            print("1. Cash\n2. Credit Card\n3. Check")
+            payment_choice: input("Select a payment type: ")
+
+            if payment_choice == '1':
+                amount_tendered = Decimal(input("Enter amount tendered: "))
+                change = amount_tendered - grand_total
+                print("\n==== Receipt ====")
+                print(cart)
+
             request_again_flag = False
             break
         else:
